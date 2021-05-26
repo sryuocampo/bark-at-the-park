@@ -7,34 +7,34 @@
 .home-page h1 {
   color: black;
   font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
-  font-size: 7rem;
+  font-size: 75px;
   font-weight: 100;
   z-index: 2;
 }
 
 .home-page p {
-  font-size: 25px;
+  font-size: 18px;
   font-family: 'Spectral', Arial, Helvetica, sans-serif;
-  margin-top: 225px;
+  margin-top: 190px;
+  z-index: 3;
+  text-align: center;
 }
 
 .home-page .blue-box {
   background-color: #658795;
   position: absolute;
-  width: 665px;
-  height: 500px;
-  padding: 25px;
-  right: 30px;
+  width: 50.5%;
+  height: 45%;
+  right: 0;
   z-index: 1;
 }
 
 .home-page .green-box {
   background-color: #9ebf82;
   position: absolute;
-  width: 665px;
-  height: 300px;
-  padding: 25px;
-  left: 30px;
+  width: 50%;
+  height: 30%;
+  left: 0;
 }
 
 .container {
