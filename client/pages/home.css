@@ -13,18 +13,20 @@
 }
 
 .home-page p {
-  font-size: 18px;
+  font-size: 22px;
   font-family: 'Spectral', Arial, Helvetica, sans-serif;
-  margin-top: 190px;
+  margin-top: 115px;
   z-index: 3;
   text-align: center;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 .home-page .blue-box {
   background-color: #658795;
   position: absolute;
   width: 50.5%;
-  height: 45%;
+  height: 265px;
   right: 0;
   z-index: 1;
 }
@@ -33,7 +35,7 @@
   background-color: #9ebf82;
   position: absolute;
   width: 50%;
-  height: 30%;
+  height: 200px;
   left: 0;
 }
 
