@@ -1,0 +1,50 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-page h1 {
+  color: black;
+  font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
+  font-size: 7rem;
+  font-weight: 100;
+  z-index: 2;
+}
+
+.home-page p {
+  font-size: 25px;
+  font-family: 'Spectral', Arial, Helvetica, sans-serif;
+  margin-top: 225px;
+}
+
+.home-page .blue-box {
+  background-color: #658795;
+  position: absolute;
+  width: 665px;
+  height: 500px;
+  padding: 25px;
+  right: 30px;
+  z-index: 1;
+}
+
+.home-page .green-box {
+  background-color: #9ebf82;
+  position: absolute;
+  width: 665px;
+  height: 300px;
+  padding: 25px;
+  left: 30px;
+}
+
+.container {
+  max-width: 575px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+}
