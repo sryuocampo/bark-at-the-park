@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.css';
+import Info from './info.jsx';
 export default function Home(props) {
   return (
     <div className="container">
@@ -9,6 +10,7 @@ export default function Home(props) {
       <h1>Bark at the Park</h1>
       <p>A place for your furry friend to make their own furry friend.</p>
    </div>
+   <Info/>
    </div>
   );
 }

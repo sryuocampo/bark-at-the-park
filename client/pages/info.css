@@ -1,0 +1,98 @@
+.bark-popup {
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+  width: 300px;
+  height: 515px;
+  top: 75px;
+  left: calc(50% - 150px);
+  padding: 20px;
+  z-index: 100;
+  box-shadow: 0 4px 10px #0006;
+}
+
+.header {
+  margin: -20px -20px 0 -20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.bark-popup h1 {
+  background-color: #f7c806;
+  font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
+  font-size: 52px;
+  font-weight: 100;
+  margin: 0;
+  text-align: center;
+}
+
+.bark-popup h4 {
+  font-family: 'Spectral', Arial, Helvetica, sans-serif;
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.bark-popup .text {
+  height: 35px;
+  border-radius: 5px;
+  margin-bottom: 21px;
+}
+
+.bark-popup select {
+  background-color: white;
+  font-family: 'Spectral', Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  margin-bottom: 43px;
+  height: 35px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit {
+  background-color: #9fbf8285;
+  font-family: 'Spectral', Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  border: 1px solid black;
+  border-radius: 8px;
+  align-items: center;
+  width: 107px;
+  height: 43px;
+}
+
+.cancel {
+  background-color: #fff2bb;
+  font-family: 'Spectral', Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 107px;
+  height: 43px;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  border-radius: 90px;
+  background-size: cover;
+  background-position: center;
+  margin: 10px auto;
+  position: relative;
+}
+
+img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  background-color: white;
+  border-radius: 26px;
+}
