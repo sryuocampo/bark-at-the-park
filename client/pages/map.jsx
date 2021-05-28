@@ -1,4 +1,4 @@
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import React from 'react';
 import Info from './info.jsx';
 import './map.css';
@@ -23,10 +23,10 @@ export default function Map(props) {
           options={{
             fullscreenControl: false,
             streetViewControl: false,
-            mapTypeControl: false
+            mapTypeControl: false,
+            zoomControl: false
           }}
         >
-          <Marker position={center} />
         </GoogleMap>
       </LoadScript>
 

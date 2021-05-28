@@ -11,6 +11,7 @@
   font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
   font-size: 39px;
   text-align: center;
+  cursor: pointer;
 }
 
 #profile {
@@ -24,4 +25,5 @@
   background-position: center;
   border: 1px solid black;
   border-radius: 41px;
+  cursor: pointer;
 }
