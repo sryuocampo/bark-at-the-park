@@ -29,6 +29,8 @@
     ]
   },
   "dependencies": {
+    "@react-firebase/auth": "^0.2.10",
+    "@react-firebase/firestore": "^0.5.5",
     "@react-google-maps/api": "^2.2.0",
     "argon2": "^0.27.2",
     "dotenv": "^10.0.0",

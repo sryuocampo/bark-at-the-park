@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from "girebase/app"
+import "fire"
 import './info.css';
 export default function Info(props) {
   return (

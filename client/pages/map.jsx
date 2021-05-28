@@ -13,6 +13,7 @@ const center = {
 };
 export default function Map(props) {
   const [showProfile, setShowProfile] = React.useState(false);
+  const [leavingPark, goingToPark] = React.useState(false);
   return (
     <>
       <LoadScript googleMapsApiKey="AIzaSyDqufKhAaZoJGVZ2qcoQbSV7LnfKyLBfIY">
@@ -30,14 +31,14 @@ export default function Map(props) {
         </GoogleMap>
       </LoadScript>
 
-      <button id="park">Go to the Park!</button>
-      <button id="leavePark">Leave Park!</button>
+      <button onClick={() => goingToPark(true)} id="park">Go to the Park!</button>
       <button
         onClick={() => setShowProfile(true)}
         id="profile"
         style={{ backgroundImage: 'url(./icons/osobesitos.jpg)' }}
       ></button>
       {showProfile ? <Info onClose={() => setShowProfile(false)} /> : null}
+      {leavingPark ? <button onClick={() => goingToPark(false)} id="leavePark">Leave the Park!</button> : null}
     </>
   );
 }
