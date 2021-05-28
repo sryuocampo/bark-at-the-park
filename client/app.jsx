@@ -1,8 +1,8 @@
 import React from 'react';
-import Map from './pages/map';
+import Home from './pages/home';
 
 export default class App extends React.Component {
   render() {
-    return <Map />;
+    return <Home />;
   }
 }
