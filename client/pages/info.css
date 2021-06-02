@@ -76,6 +76,11 @@
   cursor: pointer;
 }
 
+.submit:disabled {
+  opacity: 0.75;
+  border: none;
+}
+
 .cancel {
   background-color: #fff2bb;
   font-family: 'Spectral', Arial, Helvetica, sans-serif;

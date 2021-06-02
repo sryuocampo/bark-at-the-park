@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 import 'firebase/auth';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
+import { FirestoreProvider } from '@react-firebase/firestore';
 
 const config = {
   apiKey: 'AIzaSyDiOp1vvIVa2__UnLnl93ihIpVdkh0SCI8',
@@ -16,8 +18,10 @@ const config = {
 };
 
 ReactDOM.render(
-  <FirebaseAuthProvider firebase={firebase} {...config}>
-    <App />
-  </FirebaseAuthProvider>,
+  <FirestoreProvider {...config} firebase={firebase}>
+    <FirebaseAuthProvider firebase={firebase} {...config}>
+      <App />
+    </FirebaseAuthProvider>
+  </FirestoreProvider>,
   document.querySelector('#root')
 );

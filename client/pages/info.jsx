@@ -1,8 +1,19 @@
+import { FirestoreMutation } from '@react-firebase/firestore';
 import React from 'react';
+
 import './info.css';
-export default function Info({ auth, onClose }) {
-  // Read userPets table using user.uid to get pet info
-  // On save, save pet info to userPets at user.uid
+
+function Info({ initProfile, onSave, onClose }) {
+  const [profile, setProfile] = React.useState(
+    initProfile || {
+      icon: '001.png',
+      names: '',
+      sizes: ''
+    }
+  );
+
+  const isInvalid = !profile.names || !profile.sizes;
+
   return (
     <div className="backdrop">
       <div className="bark-popup">
@@ -11,16 +22,29 @@ export default function Info({ auth, onClose }) {
         </div>
         <div
           className="image"
-          style={{ backgroundImage: 'url(./icons/osobesitos.jpg)' }}
+          style={{ backgroundImage: `url(./Icons/${profile.icon})` }}
         >
-          <img src="./icons/add.svg" />
+          <img src="./Icons/add.svg" />
         </div>
-
         <div className="form">
-          <h4>Name</h4>
-          <input type="text" className="text"></input>
-          <h4>Size</h4>
-          <select name="size" id="pet-size">
+          <h4>Names (of one or more dogs)</h4>
+          <input
+            type="text"
+            className="text"
+            value={profile.names}
+            onChange={event =>
+              setProfile(state => ({ ...state, names: event.target.value }))
+            }
+          />
+          <h4>Size (of largest dog)</h4>
+          <select
+            name="size"
+            id="pet-size"
+            value={profile.sizes}
+            onChange={event =>
+              setProfile(state => ({ ...state, sizes: event.target.value }))
+            }
+          >
             <option value="">Choose an Option</option>
             <option value="toy">Toy</option>
             <option value="small">Small</option>
@@ -28,7 +52,11 @@ export default function Info({ auth, onClose }) {
             <option value="large">Large</option>
           </select>
           <div className="buttons">
-            <button onClick={onClose} className="submit">
+            <button
+              className="submit"
+              disabled={isInvalid}
+              onClick={() => onSave(profile)}
+            >
               Submit
             </button>
             <button onClick={onClose} className="cancel">
@@ -38,5 +66,26 @@ export default function Info({ auth, onClose }) {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function InfoWithFirestoreMutation({
+  auth,
+  initProfile,
+  onClose
+}) {
+  return (
+    <FirestoreMutation type="set" path={`/user_pets/${auth.user.uid}`}>
+      {({ runMutation }) => (
+        <Info
+          initProfile={initProfile}
+          onSave={async profile => {
+            await runMutation(profile);
+            onClose();
+          }}
+          onClose={onClose}
+        />
+      )}
+    </FirestoreMutation>
   );
 }

@@ -13,7 +13,7 @@ export default function Home(props) {
           <input
             id="google-paw"
             type="image"
-            src="./icons/google-paw.PNG"
+            src="./Icons/google-paw.PNG"
           ></input>
 
           <button
