@@ -8,43 +8,43 @@ import './info.css';
 const options = [
   {
     value: '001.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/001.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/001.png" />
   },
   {
     value: '002.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/002.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/002.png" />
   },
   {
     value: '003.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/003.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/003.png" />
   },
   {
     value: '004.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/004.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/004.png" />
   },
   {
     value: '005.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/005.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/005.png" />
   },
   {
     value: '006.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/006.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/006.png" />
   },
   {
     value: '007.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/007.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/007.png" />
   },
   {
     value: '008.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/008.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/008.png" />
   },
   {
     value: '009.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/009.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/009.png" />
   },
   {
     value: '010.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/010.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/010.png" />
   },
   {
     value: '011.png',
