@@ -15,14 +15,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
         test: /\.jsx?$/,
         include: clientPath,
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: [
-              '@babel/plugin-transform-react-jsx'
-            ]
+            plugins: ['@babel/plugin-transform-react-jsx']
           }
         }
       }

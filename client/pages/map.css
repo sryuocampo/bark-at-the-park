@@ -1,0 +1,46 @@
+#park {
+  z-index: 100;
+  position: absolute;
+  border: 1px solid #24ad91;
+  border-radius: 13px;
+  width: 256px;
+  height: 50px;
+  bottom: 20px;
+  left: calc(50% - 128px);
+  background-color: #24ad91;
+  font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
+  font-size: 39px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#profile {
+  z-index: 100;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 55px;
+  height: 55px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 41px;
+  cursor: pointer;
+}
+
+#leavePark {
+  z-index: 100;
+  position: absolute;
+  border: 1px solid #24ad91;
+  border-radius: 13px;
+  width: 256px;
+  height: 50px;
+  bottom: 20px;
+  left: calc(50% - 128px);
+  background-color: #cf2f2f;
+  font-family: 'Amatic SC', Arial, Helvetica, sans-serif;
+  font-size: 39px;
+  text-align: center;
+  cursor: pointer;
+}
+
