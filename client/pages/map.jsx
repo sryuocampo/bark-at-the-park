@@ -1,8 +1,7 @@
 /* eslint-disable multiline-ternary */
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React from 'react';
-import Info from './info.jsx';
-import { geolocated } from 'react-geolocated';
+import InfoWithFirestoreMutation from './info.jsx';
 import './map.css';
 import { FirestoreDocument } from '@react-firebase/firestore';
 
@@ -80,7 +79,12 @@ export default function Map({ auth }) {
                 }}
                 onLoad={setMap}
                 onBoundsChanged={handleBoundsChange}
-              ></GoogleMap>
+              >
+                <Marker
+                  title="This is title"
+                  position={{ lat: 33.74, lng: -117.86 }}
+                />
+              </GoogleMap>
             </LoadScript>
             <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
             {goingToPark ? (
@@ -101,7 +105,7 @@ export default function Map({ auth }) {
               }}
             ></button>
             {showProfile || value === null ? (
-              <Info
+              <InfoWithFirestoreMutation
                 auth={auth}
                 initProfile={value}
                 onClose={() => setShowProfile(false)}
