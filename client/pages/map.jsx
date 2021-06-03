@@ -1,18 +1,18 @@
 /* eslint-disable multiline-ternary */
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React from 'react';
-import Info from './info.jsx';
+import InfoWithFirestoreMutation from './info.jsx';
 import './map.css';
 import { FirestoreDocument } from '@react-firebase/firestore';
 
 const containerStyle = {
   width: '100vw',
-  height: '100vh'
+  height: '100vh',
 };
 
 const center = {
   lat: 33.813622,
-  lng: -118.096187
+  lng: -118.096187,
 };
 /**
  {
@@ -39,6 +39,25 @@ export default function Map({ auth }) {
 
   const [showProfile, setShowProfile] = React.useState(false);
   const [goingToPark, setGoingToPark] = React.useState(false);
+  const [map, setMap] = React.useState(null);
+  const [mapCenter, setMapCenter] = React.useState(center);
+
+  React.useEffect(() => {
+    navigator.geolocation &&
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setMapCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+  }, []);
+
+  const handleBoundsChange = () =>
+    console.log(
+      map?.getBounds(),
+      map?.getCenter().lng(),
+      map?.getCenter().lat()
+    );
 
   return (
     <FirestoreDocument path={`/user_pets/${auth.user.uid}`}>
@@ -50,17 +69,24 @@ export default function Map({ auth }) {
             <LoadScript googleMapsApiKey="AIzaSyDqufKhAaZoJGVZ2qcoQbSV7LnfKyLBfIY">
               <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={center}
+                center={mapCenter}
                 zoom={13}
                 options={{
                   fullscreenControl: false,
                   streetViewControl: false,
                   mapTypeControl: false,
-                  zoomControl: false
+                  zoomControl: false,
                 }}
-              ></GoogleMap>
+                onLoad={setMap}
+                onBoundsChanged={handleBoundsChange}
+              >
+                <Marker
+                  title="This is title"
+                  position={{ lat: 33.74, lng: -117.86 }}
+                />
+              </GoogleMap>
             </LoadScript>
-            <i className="fas fa-paw"></i>
+            <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
             {goingToPark ? (
               <button onClick={() => setGoingToPark(false)} id="leavePark">
                 Leave the Park!
@@ -75,11 +101,11 @@ export default function Map({ auth }) {
               id="profile"
               style={{
                 backgroundImage: `url(
-                    ./Icons/${(value && value.icon) || '001.png'})`
+                    ./Icons/${(value && value.icon) || '001.png'})`,
               }}
             ></button>
             {showProfile || value === null ? (
-              <Info
+              <InfoWithFirestoreMutation
                 auth={auth}
                 initProfile={value}
                 onClose={() => setShowProfile(false)}

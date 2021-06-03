@@ -48,3 +48,16 @@
   cursor: pointer;
   box-shadow: 0 6px 8px #0006;
 }
+
+.fas.fa-paw {
+  z-index: 100;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  background: #fff6;
+  border-radius: 25px;
+  padding: 3px;
+  border: 2px solid black;
+}
