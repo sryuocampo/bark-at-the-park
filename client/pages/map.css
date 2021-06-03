@@ -22,7 +22,9 @@
   top: 15px;
   width: 55px;
   height: 55px;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff2bb;
+  background-size: 70%;
   background-position: center;
   border: 2px solid white;
   border-radius: 41px;

@@ -1,7 +1,111 @@
+/* eslint-disable multiline-ternary */
 import { FirestoreMutation } from '@react-firebase/firestore';
 import React from 'react';
+import Select from 'react-select';
 
 import './info.css';
+
+const options = [
+  {
+    value: '001.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/001.png" />
+  },
+  {
+    value: '002.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/002.png" />
+  },
+  {
+    value: '003.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/003.png" />
+  },
+  {
+    value: '004.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/004.png" />
+  },
+  {
+    value: '005.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/005.png" />
+  },
+  {
+    value: '006.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/006.png" />
+  },
+  {
+    value: '007.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/007.png" />
+  },
+  {
+    value: '008.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/008.png" />
+  },
+  {
+    value: '009.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/009.png" />
+  },
+  {
+    value: '010.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/010.png" />
+  },
+  {
+    value: '011.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/011.png" />
+  },
+  {
+    value: '012.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/012.png" />
+  },
+  {
+    value: '013.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/013.png" />
+  },
+  {
+    value: '014.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/014.png" />
+  },
+  {
+    value: '015.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/015.png" />
+  },
+  {
+    value: '016.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/016.png" />
+  },
+  {
+    value: '017.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/017.png" />
+  },
+  {
+    value: '018.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/018.png" />
+  },
+  {
+    value: '019.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/019.png" />
+  },
+  {
+    value: '020.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/020.png" />
+  },
+  {
+    value: '021.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/021.png" />
+  },
+  {
+    value: '022.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/022.png" />
+  },
+  {
+    value: '023.png',
+    label: <img className="dog-image-profile-selected" src="./Icons/023.png" />
+  }
+];
+
+const DogIconPicker = ({ open, onChange }) =>
+  open ? (
+    <div className="dog-icon-picker-select-button">
+      <Select onChange={onChange} menuIsOpen options={options} />
+    </div>
+  ) : null;
 
 function Info({ initProfile, onSave, onClose }) {
   const [profile, setProfile] = React.useState(
@@ -11,6 +115,8 @@ function Info({ initProfile, onSave, onClose }) {
       sizes: ''
     }
   );
+
+  const [showDogPicker, setShowDogPicker] = React.useState(false);
 
   const isInvalid = !profile.names || !profile.sizes;
 
@@ -24,7 +130,7 @@ function Info({ initProfile, onSave, onClose }) {
           className="image"
           style={{ backgroundImage: `url(./Icons/${profile.icon})` }}
         >
-          <img src="./Icons/add.svg" />
+          <img onClick={() => setShowDogPicker(true)} src="./Icons/add.svg" />
         </div>
         <div className="form">
           <h4>Names (of one or more dogs)</h4>
@@ -37,6 +143,7 @@ function Info({ initProfile, onSave, onClose }) {
             }
           />
           <h4>Size (of largest dog)</h4>
+
           <select
             name="size"
             id="pet-size"
@@ -64,6 +171,13 @@ function Info({ initProfile, onSave, onClose }) {
             </button>
           </div>
         </div>
+        <DogIconPicker
+          onChange={event => {
+            setProfile(state => ({ ...state, icon: event.value }));
+            setShowDogPicker(false);
+          }}
+          open={showDogPicker}
+        />
       </div>
     </div>
   );

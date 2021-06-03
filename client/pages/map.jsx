@@ -14,14 +14,13 @@ const center = {
   lat: 33.813622,
   lng: -118.096187
 };
-
 /**
  {
    "active_pets" : {
      "3GjcZ4r41kYpf88ZDkCyvlmnURI2" : {
        "geohash" : "hkjdshfkjsh",
        "latLng" : [34.343434, 123.232323],
-        "timestamp" : 123131231231
+       "timestamp" : 123131231231
       }
     },
     "user_pets" : {
@@ -61,6 +60,7 @@ export default function Map({ auth }) {
                 }}
               ></GoogleMap>
             </LoadScript>
+            <i className="fas fa-paw"></i>
             {goingToPark ? (
               <button onClick={() => setGoingToPark(false)} id="leavePark">
                 Leave the Park!
@@ -73,7 +73,10 @@ export default function Map({ auth }) {
             <button
               onClick={() => setShowProfile(true)}
               id="profile"
-              style={{ backgroundImage: 'url(./Icons/osobesitos.jpg)' }}
+              style={{
+                backgroundImage: `url(
+                    ./Icons/${(value && value.icon) || '001.png'})`
+              }}
             ></button>
             {showProfile || value === null ? (
               <Info
