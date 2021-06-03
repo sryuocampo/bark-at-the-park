@@ -3,7 +3,11 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React from 'react';
 import InfoWithFirestoreMutation from './info.jsx';
 import './map.css';
-import { FirestoreDocument } from '@react-firebase/firestore';
+import {
+  FirestoreDocument,
+  FirestoreMutation,
+} from '@react-firebase/firestore';
+import firebase from 'firebase/app';
 
 const containerStyle = {
   width: '100vw',
@@ -59,7 +63,7 @@ export default function Map({ auth }) {
       map?.getCenter().lat()
     );
 
-  return (
+    return (
     <FirestoreDocument path={`/user_pets/${auth.user.uid}`}>
       {({ isLoading, value }) => {
         return isLoading !== false ? (
@@ -87,14 +91,55 @@ export default function Map({ auth }) {
               </GoogleMap>
             </LoadScript>
             <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
+
             {goingToPark ? (
-              <button onClick={() => setGoingToPark(false)} id="leavePark">
-                Leave the Park!
-              </button>
+              <FirestoreMutation
+                key="leave-park"
+                type="delete"
+                path={`/active_pets/${auth.user.uid}`}
+              >
+                {({ runMutation }) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        runMutation();
+                        setGoingToPark(false);
+                      }}
+                      id="leavePark"
+                    >
+                      Leave the Park!
+                    </button>
+                  );
+                }}
+              </FirestoreMutation>
             ) : (
-              <button onClick={() => setGoingToPark(true)} id="park">
-                Go to the Park!
-              </button>
+              <FirestoreMutation
+                key="going-to-park"
+                type="set"
+                path={`/active_pets/${auth.user.uid}`}
+              >
+                {({ runMutation }) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        runMutation({
+                          geohash: 'dskjfhsjkh',
+                          position: [39.343434, 120.23232],
+                          profile: firebase
+                            .firestore()
+                            .doc(`/user_pets/${auth.user.uid}`),
+                          timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                        });
+                        setGoingToPark(true);
+                      }}
+                      id="park"
+                    >
+                      Go to the Park!
+                    </button>
+                  );
+                }}
+              </FirestoreMutation>
             )}
             <button
               onClick={() => setShowProfile(true)}
