@@ -1,3 +1,10 @@
+.backdrop {
+  position: fixed;
+  inset: 0 0 0 0;
+  background: #fff9;
+  z-index: 100;
+}
+
 .bark-popup {
   background-color: white;
   border: 2px solid black;
@@ -11,11 +18,11 @@
   box-shadow: 0 4px 10px #0006;
 }
 
-.header {
+.bark-popup .header {
   margin: -20px -20px 0 -20px;
 }
 
-.form {
+.bark-popup .form {
   display: flex;
   flex-direction: column;
   margin-right: 10px;
@@ -52,12 +59,12 @@
   height: 35px;
 }
 
-.buttons {
+.bark-popup .buttons {
   display: flex;
   justify-content: space-between;
 }
 
-.submit {
+.bark-popup .submit {
   background-color: #9fbf8285;
   font-family: 'Spectral', Arial, Helvetica, sans-serif;
   font-size: 19px;
@@ -69,7 +76,12 @@
   cursor: pointer;
 }
 
-.cancel {
+.bark-popup .submit:disabled {
+  opacity: 0.75;
+  border: none;
+}
+
+.bark-popup .cancel {
   background-color: #fff2bb;
   font-family: 'Spectral', Arial, Helvetica, sans-serif;
   font-size: 19px;
@@ -80,21 +92,36 @@
   cursor: pointer;
 }
 
-.image {
+.bark-popup .image {
   width: 150px;
   height: 150px;
   border-radius: 90px;
-  background-size: cover;
+  background-size: 67%;
   background-position: center;
+  background-repeat: no-repeat;
   margin: 10px auto;
   position: relative;
+  background-color: #fff2bb;
 }
 
-img {
+.bark-popup .image > img {
   position: absolute;
   bottom: 0;
   right: 0;
   width: 32px;
   background-color: white;
   border-radius: 26px;
+}
+
+.bark-popup .dog-icon-picker-select-button {
+  top: 217px;
+  left: 50px;
+  position: absolute;
+  width: 200px;
+}
+
+.bark-popup .dog-image-profile-selected {
+  width: 90px;
+  margin: auto;
+  display: block;
 }
