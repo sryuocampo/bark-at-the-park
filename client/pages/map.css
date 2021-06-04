@@ -60,4 +60,5 @@
   border-radius: 25px;
   padding: 3px;
   border: 2px solid black;
+  pointer-events: none;
 }
