@@ -1,13 +1,16 @@
 /* eslint-disable multiline-ternary */
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import React from 'react';
-import InfoWithFirestoreMutation from './info.jsx';
-import './map.css';
 import {
   FirestoreDocument,
   FirestoreMutation
 } from '@react-firebase/firestore';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import firebase from 'firebase/app';
+import { geohashForLocation } from 'geofire-common';
+import React from 'react';
+
+import InfoWithFirestoreMutation from './info.jsx';
+import './map.css';
+import MapMarkers from './MapMarkers';
 
 const containerStyle = {
   width: '100vw',
@@ -90,16 +93,12 @@ export default function Map({ auth }) {
                     onLoad={setMap}
                     onBoundsChanged={handleBoundsChange}
                   >
-                    <Marker
-                      title="This is title"
-                      position={{ lat: 33.74, lng: -117.86 }}
-                    />
+                    <MapMarkers activePet={activePet} />
                   </GoogleMap>
                 </LoadScript>
                 {activePet.value ? null : (
                   <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
                 )}
-
                 {activePet.value ? (
                   <FirestoreMutation
                     key="leave-park"
@@ -130,7 +129,9 @@ export default function Map({ auth }) {
                         <button
                           onClick={() => {
                             runMutation({
-                              geohash: 'dskjfhsjkh',
+                              geohash: geohashForLocation(
+                                targetLocation.current
+                              ),
                               position: targetLocation.current,
                               profile: firebase
                                 .firestore()
