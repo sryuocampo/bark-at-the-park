@@ -21,29 +21,8 @@ const center = {
   lat: 33.813622,
   lng: -118.096187
 };
-/**
- {
-   "active_pets" : {
-     "3GjcZ4r41kYpf88ZDkCyvlmnURI2" : {
-       "geohash" : "hkjdshfkjsh",
-       "latLng" : [34.343434, 123.232323],
-       "timestamp" : 123131231231
-      }
-    },
-    "user_pets" : {
-      "3GjcZ4r41kYpf88ZDkCyvlmnURI2" : {
-        "icon" : "icon.png",
-        "names" : “Besitos and Oso,
-        "sizes" : “Small”
-      }
-    }
-  }
-  */
 
 export default function Map({ auth }) {
-  // Load user's activePets entry to see if at park.
-  // Load pets at parks from activePets and add markers to map.
-
   const [showProfile, setShowProfile] = React.useState(false);
   const [map, setMap] = React.useState(null);
   const [mapCenter, setMapCenter] = React.useState(center);
@@ -69,10 +48,19 @@ export default function Map({ auth }) {
     }
   };
 
+  // const dateAgo = new Date(Date.now() - 90 * 60 * 1000);
+
   return (
     <FirestoreDocument path={`/user_pets/${auth.user.uid}`}>
       {profile => (
-        <FirestoreDocument path={`/active_pets/${auth.user.uid}`}>
+        <FirestoreDocument
+          path={`/active_pets/${auth.user.uid}`}
+          // where={{
+          //   field: 'timestamp',
+          //   operator: '>',
+          //   value: firebase.firestore.Timestamp.fromDate(dateAgo),
+          // }}
+        >
           {activePet => {
             return profile.isLoading !== false &&
               activePet.isLoading !== false ? (
@@ -93,7 +81,7 @@ export default function Map({ auth }) {
                     onLoad={setMap}
                     onBoundsChanged={handleBoundsChange}
                   >
-                    <MapMarkers activePet={activePet} />
+                    <MapMarkers mapCenter={mapCenter} activePet={activePet} />{' '}
                   </GoogleMap>
                 </LoadScript>
                 {activePet.value ? null : (
@@ -133,9 +121,7 @@ export default function Map({ auth }) {
                                 targetLocation.current
                               ),
                               position: targetLocation.current,
-                              profile: firebase
-                                .firestore()
-                                .doc(`/user_pets/${auth.user.uid}`),
+                              profile: profile.value,
                               timestamp:
                                 firebase.firestore.FieldValue.serverTimestamp()
                             });

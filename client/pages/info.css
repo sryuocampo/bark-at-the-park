@@ -57,6 +57,7 @@
   border-radius: 5px;
   margin-bottom: 43px;
   height: 35px;
+  cursor: pointer;
 }
 
 .bark-popup .buttons {
@@ -111,6 +112,7 @@
   width: 32px;
   background-color: white;
   border-radius: 26px;
+  cursor: pointer;
 }
 
 .bark-popup .dog-icon-picker-select-button {
