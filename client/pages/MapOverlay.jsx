@@ -39,7 +39,7 @@ export default function MapOverlay({
         <>
           <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
           <FirestoreMutation
-            key="going-to-park"
+            key={JSON.stringify(profile.value)}
             type="set"
             path={`/active_pets/${auth.user.uid}`}
           >
@@ -52,7 +52,7 @@ export default function MapOverlay({
                       position: targetLocation.current,
                       profile: profile.value,
                       timestamp:
-                        firebase.firestore.FieldValue.serverTimestamp(),
+                        firebase.firestore.FieldValue.serverTimestamp()
                     });
                   }}
                   id="park"
@@ -69,7 +69,7 @@ export default function MapOverlay({
         id="profile"
         style={{
           backgroundImage: `url(
-              ./Icons/${(profile.value && profile.value.icon) || '001.png'})`,
+              ./Icons/${(profile.value && profile.value.icon) || '001.png'})`
         }}
       ></button>
       {showProfile || profile.value === null ? (
