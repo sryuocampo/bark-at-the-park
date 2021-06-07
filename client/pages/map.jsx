@@ -1,29 +1,23 @@
 /* eslint-disable multiline-ternary */
-import {
-  FirestoreDocument,
-  FirestoreMutation
-} from '@react-firebase/firestore';
+import { FirestoreDocument } from '@react-firebase/firestore';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import firebase from 'firebase/app';
-import { geohashForLocation } from 'geofire-common';
 import React from 'react';
 
-import InfoWithFirestoreMutation from './info.jsx';
 import './map.css';
 import MapMarkers from './MapMarkers';
+import MapOverlay from './MapOverlay';
 
 const containerStyle = {
   width: '100vw',
-  height: '100vh'
+  height: '100vh',
 };
 
 const center = {
   lat: 33.813622,
-  lng: -118.096187
+  lng: -118.096187,
 };
 
 export default function Map({ auth }) {
-  const [showProfile, setShowProfile] = React.useState(false);
   const [map, setMap] = React.useState(null);
   const [mapCenter, setMapCenter] = React.useState(center);
   const targetLocation = React.useRef(center);
@@ -33,11 +27,11 @@ export default function Map({ auth }) {
       navigator.geolocation.getCurrentPosition(function (position) {
         setMapCenter({
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         });
         targetLocation.current = [
           position.coords.latitude,
-          position.coords.longitude
+          position.coords.longitude,
         ];
       });
   }, []);
@@ -52,20 +46,13 @@ export default function Map({ auth }) {
 
   return (
     <FirestoreDocument path={`/user_pets/${auth.user.uid}`}>
-      {profile => (
-        <FirestoreDocument
-          path={`/active_pets/${auth.user.uid}`}
-          // where={{
-          //   field: 'timestamp',
-          //   operator: '>',
-          //   value: firebase.firestore.Timestamp.fromDate(dateAgo),
-          // }}
-        >
-          {activePet => {
+      {(profile) => (
+        <FirestoreDocument path={`/active_pets/${auth.user.uid}`}>
+          {(activePet) => {
             return profile.isLoading !== false &&
               activePet.isLoading !== false ? (
               <div />
-                ) : (
+            ) : (
               <>
                 <LoadScript googleMapsApiKey="AIzaSyDqufKhAaZoJGVZ2qcoQbSV7LnfKyLBfIY">
                   <GoogleMap
@@ -76,83 +63,22 @@ export default function Map({ auth }) {
                       fullscreenControl: false,
                       streetViewControl: false,
                       mapTypeControl: false,
-                      zoomControl: false
+                      zoomControl: false,
                     }}
                     onLoad={setMap}
                     onBoundsChanged={handleBoundsChange}
                   >
-                    <MapMarkers mapCenter={mapCenter} activePet={activePet} />{' '}
+                    <MapMarkers mapCenter={mapCenter} activePet={activePet} />
                   </GoogleMap>
                 </LoadScript>
-                {activePet.value ? null : (
-                  <img className="fas fa-paw" src="./Icons/paw-icon.svg" />
-                )}
-                {activePet.value ? (
-                  <FirestoreMutation
-                    key="leave-park"
-                    type="delete"
-                    path={`/active_pets/${auth.user.uid}`}
-                  >
-                    {({ runMutation }) => {
-                      return (
-                        <button
-                          onClick={() => {
-                            runMutation();
-                          }}
-                          id="leavePark"
-                        >
-                          Leave the Park!
-                        </button>
-                      );
-                    }}
-                  </FirestoreMutation>
-                ) : (
-                  <FirestoreMutation
-                    key="going-to-park"
-                    type="set"
-                    path={`/active_pets/${auth.user.uid}`}
-                  >
-                    {({ runMutation }) => {
-                      return (
-                        <button
-                          onClick={() => {
-                            runMutation({
-                              geohash: geohashForLocation(
-                                targetLocation.current
-                              ),
-                              position: targetLocation.current,
-                              profile: profile.value,
-                              timestamp:
-                                firebase.firestore.FieldValue.serverTimestamp()
-                            });
-                          }}
-                          id="park"
-                        >
-                          Go to the Park!
-                        </button>
-                      );
-                    }}
-                  </FirestoreMutation>
-                )}
-                <button
-                  onClick={() => setShowProfile(true)}
-                  id="profile"
-                  style={{
-                    backgroundImage: `url(
-                        ./Icons/${
-                          (profile.value && profile.value.icon) || '001.png'
-                        })`
-                  }}
-                ></button>
-                {showProfile || profile.value === null ? (
-                  <InfoWithFirestoreMutation
-                    auth={auth}
-                    initProfile={profile.value}
-                    onClose={() => setShowProfile(false)}
-                  />
-                ) : null}
+                <MapOverlay
+                  auth={auth}
+                  profile={profile}
+                  activePet={activePet}
+                  targetLocation={targetLocation}
+                />
               </>
-                );
+            );
           }}
         </FirestoreDocument>
       )}
