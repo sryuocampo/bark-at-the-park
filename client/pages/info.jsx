@@ -48,56 +48,56 @@ const options = [
   },
   {
     value: '011.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/011.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/011.png" />
   },
   {
     value: '012.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/012.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/012.png" />
   },
   {
     value: '013.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/013.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/013.png" />
   },
   {
     value: '014.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/014.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/014.png" />
   },
   {
     value: '015.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/015.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/015.png" />
   },
   {
     value: '016.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/016.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/016.png" />
   },
   {
     value: '017.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/017.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/017.png" />
   },
   {
     value: '018.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/018.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/018.png" />
   },
   {
     value: '019.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/019.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/019.png" />
   },
   {
     value: '020.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/020.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/020.png" />
   },
   {
     value: '021.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/021.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/021.png" />
   },
   {
     value: '022.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/022.png" />,
+    label: <img className="dog-image-profile-selected" src="./Icons/022.png" />
   },
   {
     value: '023.png',
-    label: <img className="dog-image-profile-selected" src="./Icons/023.png" />,
-  },
+    label: <img className="dog-image-profile-selected" src="./Icons/023.png" />
+  }
 ];
 
 const DogIconPicker = ({ open, onChange }) =>
@@ -112,7 +112,7 @@ function Info({ initProfile, onSave, onClose }) {
     initProfile || {
       icon: '001.png',
       names: '',
-      sizes: '',
+      sizes: ''
     }
   );
 
@@ -122,7 +122,7 @@ function Info({ initProfile, onSave, onClose }) {
 
   return (
     <div className="backdrop">
-      <div className="bark-popup">
+      <div className="animate__animated animate__backInDown bark-popup">
         <div className="header">
           <h1>Bark Profile</h1>
         </div>
@@ -138,8 +138,8 @@ function Info({ initProfile, onSave, onClose }) {
             type="text"
             className="text"
             value={profile.names}
-            onChange={(event) =>
-              setProfile((state) => ({ ...state, names: event.target.value }))
+            onChange={event =>
+              setProfile(state => ({ ...state, names: event.target.value }))
             }
           />
           <h4>Size (of largest dog)</h4>
@@ -148,8 +148,8 @@ function Info({ initProfile, onSave, onClose }) {
             name="size"
             id="pet-size"
             value={profile.sizes}
-            onChange={(event) =>
-              setProfile((state) => ({ ...state, sizes: event.target.value }))
+            onChange={event =>
+              setProfile(state => ({ ...state, sizes: event.target.value }))
             }
           >
             <option value="">Choose an Option</option>
@@ -173,8 +173,8 @@ function Info({ initProfile, onSave, onClose }) {
         </div>
         <DogIconPicker
           open={showDogPicker}
-          onChange={(event) => {
-            setProfile((state) => ({ ...state, icon: event.value }));
+          onChange={event => {
+            setProfile(state => ({ ...state, icon: event.value }));
             setShowDogPicker(false);
           }}
         />
@@ -186,14 +186,14 @@ function Info({ initProfile, onSave, onClose }) {
 export default function InfoWithFirestoreMutation({
   auth,
   initProfile,
-  onClose,
+  onClose
 }) {
   return (
     <FirestoreMutation type="set" path={`/user_pets/${auth.user.uid}`}>
       {({ runMutation }) => (
         <Info
           initProfile={initProfile}
-          onSave={async (profile) => {
+          onSave={async profile => {
             await runMutation(profile);
             onClose();
           }}
