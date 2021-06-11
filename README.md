@@ -17,6 +17,6 @@ Figma, Visual Code Studios, HTML, CSS, React, and Firebase
 
 ### Get Started 
 1. cd ~/repos
-2. Clone to repository
-3. cd bark-at-the-park projec
+2. Clone to repository git clone git@github.com/bark-at-the-park
+3. cd bark-at-the-park project
 4. npm ci
