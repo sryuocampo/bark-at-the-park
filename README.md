@@ -1,6 +1,6 @@
 # final-project
 
-A full stack JavaScript solo project.
+A full stack real-time JavaScript solo project.
 
 ### Technologies used to build this project include:
 Figma, Visual Code Studios, HTML, CSS, React, and Firebase
